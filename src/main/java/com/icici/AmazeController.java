@@ -1227,6 +1227,7 @@ public class AmazeController {
 			@RequestParam Double RRN, 
 			@RequestParam String MOBILE,
 			@RequestParam String CHANNEL,
+			@RequestParam String TEST,
 			@RequestParam(required = false) Long OFFSET,
 			@RequestParam(required = false) Long LIMIT, int... attemptNumber) {
 		Statistics transactionStatistics = new Statistics();
@@ -1268,7 +1269,7 @@ public class AmazeController {
 			} else {
 				logger.error(" CHANNEL " + CHANNEL + " USERID " + USERID + " getTransactions E00 "
 						+ transactionStatistics.totalTimeRequired());
-				getTransactions(USERID, RRN, MOBILE, CHANNEL, OFFSET, LIMIT, 1);
+				getTransactions(USERID, RRN, MOBILE, CHANNEL, TEST, OFFSET, LIMIT, 1);
 			}
 		} catch (CustomException S) {
 			dataMap.put("STATUS", 500);
@@ -1287,7 +1288,7 @@ public class AmazeController {
 						logger.error(" CHANNEL " + CHANNEL + " USERID " + USERID
 								+ " getTransactions E00 "
 								+ transactionStatistics.totalTimeRequired());
-						getTransactions(USERID, RRN, MOBILE, CHANNEL, OFFSET,
+						getTransactions(USERID, RRN, MOBILE, CHANNEL, TEST, OFFSET,
 								LIMIT, 1);
 					}
 				} else {
@@ -2072,7 +2073,7 @@ public class AmazeController {
 						+ newCategory + " UpdateCategory-JSONRefresh");
 			}
 
-			dataMap = getTransactions(USERID, RRN, MOBILE, CHANNEL, null, null);
+			dataMap = getTransactions(USERID, RRN, MOBILE, CHANNEL, null, null, null);
 		}
 
 		catch (MongoTimeoutException exception) {
@@ -2145,7 +2146,7 @@ public class AmazeController {
 		Map<String, Object> Result = new LinkedHashMap<>();
 		try {
 			Result = amazeService.getCachedData(USERID);
-			dataMap = getTransactions(USERID, RRN, MOBILE, CHANNEL, null, null);
+			dataMap = getTransactions(USERID, RRN, MOBILE, CHANNEL, null,  null, null);
 		}
 
 		catch (MongoTimeoutException exception) {
