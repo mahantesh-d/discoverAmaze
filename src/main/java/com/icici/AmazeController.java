@@ -1448,6 +1448,7 @@ public class AmazeController {
 	@RequestMapping(value = "/getSRStatus", method = RequestMethod.GET)
 	public Map<String, Object> getSRStatus(@RequestParam String USERID,
 			@RequestParam Double RRN, @RequestParam String MOBILE,
+			@RequestParam String TEST,
 			@RequestParam String CHANNEL, int... attemptNumber) {
 
 		Statistics srStatusStatistics = new Statistics();
@@ -1517,7 +1518,7 @@ public class AmazeController {
 			} else {
 				logger.error(" CHANNEL " + CHANNEL + " USERID " + USERID + " getSRStatus E00 "
 						+ srStatusStatistics.totalTimeRequired());
-				getSRStatus(USERID, RRN, MOBILE, CHANNEL, 1);
+				getSRStatus(USERID, RRN, MOBILE, TEST, CHANNEL, 1);
 			}
 		} catch (CustomException S) {
 			dataMap.put("STATUS", 500);
@@ -1534,7 +1535,7 @@ public class AmazeController {
 					} else {
 						logger.error(" CHANNEL " + CHANNEL + " USERID " + USERID + " getSRStatus E00 "
 								+ srStatusStatistics.totalTimeRequired());
-						getSRStatus(USERID, RRN, MOBILE, CHANNEL, 1);
+						getSRStatus(USERID, RRN, MOBILE, TEST, CHANNEL, 1);
 					}
 				} else {
 					dataMap.put("STATUS", 500);
